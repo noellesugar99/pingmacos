@@ -31,11 +31,10 @@ describe('getWifiSpeed', () => {
     expect(wifiSpeed).toBeGreaterThan(0);
   });
 });
-
+```
 ## Example Implementation (TypeScript & React)
 wifiSpeed.ts (TypeScript):
 
-```typescript
 # Wi-Fi Speed Measurement App Specification
 
 ## Specification
@@ -73,9 +72,9 @@ describe('getWifiSpeed', () => {
     expect(wifiSpeed).toBeGreaterThan(0);
   });
 });
-
+```
 ## Example Implementation (TypeScript & React)
-wifiSpeed.ts (TypeScript):
+### wifiSpeed.ts (TypeScript):
 ```typescript
 
 import { NetworkInfo } from 'react-native-network-info';
@@ -90,11 +89,11 @@ export async function getWifiSpeed(): Promise<number> {
     throw new Error('Not connected to a Wi-Fi network');
   }
 }
-
+```
 This implementation checks if the device is connected to a Wi-Fi network using NetworkInfo.getSSID(). 
 If connected, it measures the Wi-Fi speed using speedTest() from the react-native-speed-test package.
 
-App.tsx (React):
+### App.tsx (React):
 ```react
 import React, { useState } from 'react';
 import { getWifiSpeed } from './wifiSpeed';
@@ -116,5 +115,56 @@ function App() {
     </div>
   );
 }
+```
+### export default App;
 
-export default App;
+vbnet
+# measuring Wi-Fi speed on an iPhone using React Native.
+
+Install the required dependencies:
+Since React Native doesn't have a built-in method for measuring Wi-Fi speed, you'll need to use a third-party package like react-native-network-info to access network details and react-native-speed-test to perform a speed test.
+
+## Install the packages:
+
+```java
+npm install react-native-network-info react-native-speed-test
+Link the packages (if using React Native <= 0.59):
+
+```java
+react-native link react-native-network-info
+react-native link react-native-speed-test
+```
+
+## Modify wifiSpeed.ts:
+
+Import the required dependencies and create a new function called getWifiSpeed:
+
+```typescript
+import { NetworkInfo } from 'react-native-network-info';
+import speedTest from 'react-native-speed-test';
+
+export async function getWifiSpeed(): Promise<number> {
+  const ssid = await NetworkInfo.getSSID();
+  if (ssid && ssid !== 'error' && ssid !== '<unknown ssid>') {
+    const speed = await speedTest();
+    return speed;
+  } else {
+    throw new Error('Not connected to a Wi-Fi network');
+  }
+}
+```
+
+This implementation checks if the device is connected to a Wi-Fi network using NetworkInfo.getSSID(). If connected, it measures the Wi-Fi speed using speedTest() from the react-native-speed-test package.
+
+## Modify the React Native component (App.tsx):
+
+Update the import statement to use the new getWifiSpeed function:
+
+```typescript
+Copy code
+import { getWifiSpeed } from './wifiSpeed';
+```
+
+The rest of the component remains the same, as it already handles triggering the Wi-Fi speed test and displaying the results.
+
+With these changes, you should now have a proper implementation for measuring Wi-Fi speed on an iPhone using React Native. Keep in mind that the react-native-speed-test package performs a download speed test, which might not provide a complete picture of the network's capabilities. You may want to look for other packages or create your own implementation to measure upload speed and latency as well.
