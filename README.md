@@ -118,7 +118,6 @@ function App() {
 ```
 ### export default App;
 
-vbnet
 # measuring Wi-Fi speed on an iPhone using React Native.
 
 Install the required dependencies:
